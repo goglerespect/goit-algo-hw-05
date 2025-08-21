@@ -7,7 +7,7 @@ def generator_numbers(text: str) -> Generator[float, None, None]:
     і повертає їх як float.
     """
     # Регулярний вираз для пошуку чисел з плаваючою крапкою або цілих
-    for match in re.finditer(r"\d+(?:\.\d+)?", text):
+    for match in re.finditer(r" (\d+(?:\.\d+)?) ", text):
         yield float(match.group())
 
 
@@ -15,4 +15,5 @@ def sum_profit(text: str, func: Callable[[str], Generator[float, None, None]]) -
     """
     Підсумовує всі числа, знайдені функцією-генератором.
     """
+
     return sum(func(text))

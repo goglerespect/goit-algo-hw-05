@@ -12,9 +12,11 @@ def input_error(func):
 
 
 def parse_input(user_input):
-    cmd, *args = user_input.split()
-    cmd = cmd.strip().lower()
-    return cmd, args
+    parts = user_input.strip().split()
+    if not parts:              # перевірка на пустий рядок
+        return "", []          
+    cmd, *args = parts
+    return cmd.lower(), args
 
 
 @input_error
@@ -56,6 +58,8 @@ def main():
     while True:
         user_input = input("Enter a command: ")
         command, args = parse_input(user_input)
+        if not command:       # пропускаємо пустий рядок
+            continue
 
         if command in ["close", "exit"]:
             print("Good bye!")
@@ -75,4 +79,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
